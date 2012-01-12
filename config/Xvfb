@@ -1,0 +1,27 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: Xvfb
+# Required-Start: $local_fs $remote_fs
+# Required-Stop:
+# X-Start-Before:
+# Default-Start: 2 3 4 5
+# Default-Stop:
+### END INIT INFO
+
+N=/etc/init.d/Xvfb
+
+set -e
+
+case "$1" in
+  start)
+Xvfb :0 -screen 0 1024x768x24 &
+;;
+  stop|reload|restart|force-reload)
+;;
+  *)  
+echo "Usage: $N {start|stop|restart|force-reload}" >&2exit 1
+;;
+esac
+
+exit 0

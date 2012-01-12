@@ -93,7 +93,7 @@ If you on a server (something without a display) you'll need to run a fake x-ser
 
     apt-get install xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 
-Add the following to /etc/init.d/Xvfb
+Add the [/etc/init.d/Xvfb](https://github.com/completelynovel/phantomrb/config/Xvfb) script
 
     #! /bin/sh
     
