@@ -59,7 +59,7 @@ To specify a different exit code use the following syntax
 
 ### Complete example
 
-The below example can be found in [./examples/](http://github.com/completelynovel/phantomrb/examples)
+The below example can be found in [./examples/](https://github.com/completelynovel/phantomrb/tree/master/examples)
 
 **./examples/hello_world.coffee**
 
@@ -93,36 +93,7 @@ If you on a server (something without a display) you'll need to run a fake x-ser
 
     apt-get install xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 
-Add the [/etc/init.d/Xvfb](https://github.com/completelynovel/phantomrb/config/Xvfb) script
-
-    #! /bin/sh
-    
-    ### BEGIN INIT INFO
-    # Provides: Xvfb
-    # Required-Start: $local_fs $remote_fs
-    # Required-Stop:
-    # X-Start-Before:
-    # Default-Start: 2 3 4 5
-    # Default-Stop:
-    ### END INIT INFO
-    
-    N=/etc/init.d/Xvfb
-    
-    set -e
-    
-    case "$1" in
-      start)
-    Xvfb :0 -screen 0 1024x768x24 &
-    ;;
-      stop|reload|restart|force-reload)
-    ;;
-      *)  
-    echo "Usage: $N {start|stop|restart|force-reload}" >&2exit 1
-    ;;
-    esac
-    
-    exit 0
-
+Add the [/etc/init.d/Xvfb](https://github.com/completelynovel/phantomrb/blob/master/config/Xvfb) script
 
 If `DISPLAY` is not set in the environment you'll also need to tell the PhantomRb which display to use, you can do this by giving an additional parameter to the `Phantom#new`
 
