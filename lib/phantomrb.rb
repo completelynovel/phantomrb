@@ -2,6 +2,7 @@ require 'escape'
 require 'open4'
 require 'tempfile'
 require 'json'
+require 'pathname'
 
 class PhantomRb
 
@@ -30,6 +31,8 @@ class PhantomRb
   #  * filepath  - path to the script to run
   #  * x_display - display to run on (useful for virtual x servers)
   def initialize(filepath, x_display=nil)
+    filepath = Pathname.new(filepath).realpath.to_s
+
     if !File.file?(filepath)
       throw "Script '#{filepath}' not found"
     end
@@ -72,10 +75,11 @@ class PhantomRb
       status = Open4.popen4(cmd) do |pid, stdin, stdout, stderr|
         out = stdout.read
         err = stderr.read
-        log "stderr: #{err}"
-        log "stdout: #{out}"
 
         ret_str = get_range(out, PHANTOM_MARKER_START, PHANTOM_MARKER_END)
+
+        $stdout.write out
+        $stderr.write err
 
         if ret_str
           ret_obj = JSON.parse(ret_str)
@@ -91,11 +95,13 @@ class PhantomRb
     # Returns text between 2 special markers (re_start/re_end) building a
     # multiline RegExp
     def get_range(text, regex_start, regex_end)
-      re = /(#{regex_start})(.*?)(#{regex_end})/m
-      match = text.match(re)
-      if match
-        return match[2].strip
+      re = /(#{regex_start})(.*?)(#{regex_end}\n)/m
+      match = nil
+      text.sub!(re) do |re_match|
+        match = $2
+        re_match = ""
       end
+      match
     end
 
     def js_master_includes

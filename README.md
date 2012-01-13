@@ -100,3 +100,7 @@ If `DISPLAY` is not set in the environment you'll also need to tell the PhantomR
     display_num = 1
     Phantom.new("scripts/hello_world.coffee", display_num)
 
+
+## Todo
+
+ * stdout/stderr doesn't log out sequence
