@@ -17,6 +17,9 @@ Gem::Specification.new do |s|
  
   # No tests yet
   #s.add_development_dependency "rspec"
+
+  s.add_dependency "escape"
+  s.add_dependency "POpen4"
  
   s.files        = Dir.glob("{lib}/**/*") + %w(README.md)
   s.require_path = 'lib'
