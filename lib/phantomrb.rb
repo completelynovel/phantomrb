@@ -3,22 +3,13 @@ require 'open4'
 require 'tempfile'
 require 'json'
 require 'pathname'
+require 'hashie'
 
 class PhantomRb
 
   # The return object wrapper
-  class ReturnObj
-    # The unix exit status of the phantom script
-    attr_reader :exit_status
-
-    def initialize(exit_status, json)
-      @exit_status = exit_status
-      @json        = json || {}
-    end
-
-    def method_missing(m, *args, &block)
-      @json[m.to_s]
-    end
+  class PhantomResult < Hashie::Mash
+    # Just a placeholder
   end
 
   PHANTOM_MARKER_START = '### PHANTOMRB_JSON_MARKER::START ###'
@@ -86,7 +77,9 @@ class PhantomRb
         end
       end
 
-      ret = ReturnObj.new(status.exitstatus, ret_obj)
+      ret_obj[:exit_status] = status.exitstatus
+
+      ret = PhantomResult.new(ret_obj)
     end
     ret
   end

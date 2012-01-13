@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "escape"
   s.add_dependency "POpen4"
+  s.add_dependency "hashie"
  
   s.files        = Dir.glob("{lib}/**/*") + %w(README.md)
   s.require_path = 'lib'
