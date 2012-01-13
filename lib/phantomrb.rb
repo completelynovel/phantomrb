@@ -8,8 +8,20 @@ require 'hashie'
 class PhantomRb
 
   # The return object wrapper
-  class PhantomResult < Hashie::Mash
-    # Just a placeholder
+  class PhantomRbResult
+    attr_reader :status, :data
+
+    def initialize(status, data)
+      @status = status
+      @data   = Hashie::Mash.new(data)
+    end
+
+    def to_s
+      {
+        :status => @status,
+        :data => @data
+      }.to_s
+    end
   end
 
   PHANTOM_MARKER_START = '### PHANTOMRB_JSON_MARKER::START ###'
@@ -77,9 +89,7 @@ class PhantomRb
         end
       end
 
-      ret_obj[:exit_status] = status.exitstatus
-
-      ret = PhantomResult.new(ret_obj)
+      ret = PhantomRbResult.new(status.exitstatus, ret_obj)
     end
     ret
   end

@@ -6,4 +6,4 @@ script = PhantomRb.new("hello_world.coffee")
 ret = script.run({
   :message => "Hello Javascript"
 })
-puts ret.message
+puts ret.data.message

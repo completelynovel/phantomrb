@@ -29,8 +29,8 @@ To run the script simple call `run` passing the args as a hash, the hash will be
 
 `run` will return an object of anything returned by the script, you can access the values via the hash accessor or the dot notation
 
-    ret.message    # => "Hello Ruby"
-    ret['message'] # => "Hello Ruby"
+    ret.data.message    # => "Hello Ruby"
+    ret.data['message'] # => "Hello Ruby"
 
 `status` is the exit status of the script run
 
@@ -78,9 +78,9 @@ The below example can be found in [./examples/](https://github.com/completelynov
     ret = script.run({
       :message => "Hello Javascript"
     })
-    puts ret.message
+    puts ret.data.message
 
-The output returned is (**TODO** 'Hello Javascript' not yet logged out)
+The output returned is
 
     Hello Javascript
     Hello Ruby
